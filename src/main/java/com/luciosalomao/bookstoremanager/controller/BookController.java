@@ -1,8 +1,10 @@
 package com.luciosalomao.bookstoremanager.controller;
 
+import com.luciosalomao.bookstoremanager.dto.BooksDTO;
 import com.luciosalomao.bookstoremanager.dto.MessageResponseDTO;
 import com.luciosalomao.bookstoremanager.repository.BookRepository;
 import com.luciosalomao.bookstoremanager.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +25,7 @@ public class BookController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody Books book) {
-        return bookService.create(book);
+    public MessageResponseDTO create(@RequestBody @Valid BooksDTO booksDTO) {
+        return bookService.create(booksDTO);
     }
 }
