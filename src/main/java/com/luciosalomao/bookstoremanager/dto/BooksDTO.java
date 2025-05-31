@@ -29,5 +29,5 @@ public class BooksDTO {
     @Size(max = 100)
     private String publisherName;
     @NotNull
-    private Author author;
+    private AuthorDTO author;
 }
