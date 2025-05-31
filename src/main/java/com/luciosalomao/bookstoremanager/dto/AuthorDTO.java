@@ -17,7 +17,8 @@ public class AuthorDTO {
     @NotBlank(message = "Name is required")
     @Size(max = 200)
     private String name;
-    @NotNull
-    @Size(max = 100)
+    @NotNull(message = "Age is required")
+    @Min(value = 0, message = "Age must be positive")
+    @Max(value = 150, message = "Age must be less than 150")
     private Integer age;
 }
