@@ -3,12 +3,11 @@ package com.luciosalomao.bookstoremanager.service;
 import com.luciosalomao.bookstoremanager.dto.BooksDTO;
 import com.luciosalomao.bookstoremanager.dto.MessageResponseDTO;
 import com.luciosalomao.bookstoremanager.entity.Books;
+import com.luciosalomao.bookstoremanager.exception.BookNotFoundException;
 import com.luciosalomao.bookstoremanager.mapper.BookMapper;
 import com.luciosalomao.bookstoremanager.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class BookService {
@@ -29,9 +28,10 @@ public class BookService {
                 .build();
     }
 
-    public BooksDTO findById(Long id) {
-       Optional<Books> optionalBooks = bookRepository.findById(id);
+    public BooksDTO findById(Long id) throws BookNotFoundException {
+      Books book = bookRepository.findById(id)
+              .orElseThrow(()->new BookNotFoundException(id));
 
-        return bookMapper.toDTO(optionalBooks.get());
+        return bookMapper.toDTO(book);
     }
 }

@@ -2,6 +2,7 @@ package com.luciosalomao.bookstoremanager.controller;
 
 import com.luciosalomao.bookstoremanager.dto.BooksDTO;
 import com.luciosalomao.bookstoremanager.dto.MessageResponseDTO;
+import com.luciosalomao.bookstoremanager.exception.BookNotFoundException;
 import com.luciosalomao.bookstoremanager.repository.BookRepository;
 import com.luciosalomao.bookstoremanager.service.BookService;
 import jakarta.validation.Valid;
@@ -27,7 +28,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public BooksDTO findById(@PathVariable Long id) {
+    public BooksDTO findById(@PathVariable Long id) throws BookNotFoundException {
         return bookService.findById(id);
     }
 }
