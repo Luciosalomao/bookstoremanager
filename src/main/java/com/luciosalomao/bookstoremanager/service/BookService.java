@@ -8,6 +8,8 @@ import com.luciosalomao.bookstoremanager.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BookService {
 
@@ -27,4 +29,9 @@ public class BookService {
                 .build();
     }
 
+    public BooksDTO findById(Long id) {
+       Optional<Books> optionalBooks = bookRepository.findById(id);
+
+        return bookMapper.toDTO(optionalBooks.get());
+    }
 }

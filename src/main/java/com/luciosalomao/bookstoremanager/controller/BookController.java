@@ -6,10 +6,7 @@ import com.luciosalomao.bookstoremanager.repository.BookRepository;
 import com.luciosalomao.bookstoremanager.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.luciosalomao.bookstoremanager.entity.Books;
 
 
@@ -27,5 +24,10 @@ public class BookController {
     @PostMapping
     public MessageResponseDTO create(@RequestBody @Valid BooksDTO booksDTO) {
         return bookService.create(booksDTO);
+    }
+
+    @GetMapping("/{id}")
+    public BooksDTO findById(@PathVariable Long id) {
+        return bookService.findById(id);
     }
 }
