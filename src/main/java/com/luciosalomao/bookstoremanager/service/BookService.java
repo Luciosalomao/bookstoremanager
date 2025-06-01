@@ -12,12 +12,11 @@ import org.springframework.stereotype.Service;
 public class BookService {
 
     private final BookRepository bookRepository;
-    private final BookMapper bookMapper;
+    private final BookMapper bookMapper = BookMapper.INSTANCE;
 
     @Autowired
-    public BookService(BookRepository bookRepository, BookMapper bookMapper) {
+    public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.bookMapper = bookMapper;
     }
 
     public MessageResponseDTO create(BooksDTO booksDTO) {
@@ -27,4 +26,5 @@ public class BookService {
                 .message("Book created with ID " + savedBook.getId() + " Nome: " + savedBook.getName())
                 .build();
     }
+
 }
